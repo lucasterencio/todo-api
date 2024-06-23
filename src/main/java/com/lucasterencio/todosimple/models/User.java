@@ -6,6 +6,8 @@ import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 
@@ -32,6 +34,8 @@ public class User {
     @Size(min = 8, max = 60)
     private String password;
 
+    @OneToMany(mappedBy = "user") //ou seja, um usuario pode ter varias tasks. A variavel user esta mapping
+    private List<Task> tasks = new ArrayList<Task>();
 
     public User() {
     }
@@ -44,6 +48,14 @@ public class User {
 
     public Long getId() {
         return id;
+    }
+
+    public List<Task> getTasks() {
+        return tasks;
+    }
+
+    public void setTasks(List<Task> tasks) {
+        this.tasks = tasks;
     }
 
     public void setId(Long id) {
